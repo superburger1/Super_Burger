@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Burger - ركن الصوصات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Super Burger</h1>
+    <div style="position: relative;">
+      <div class="cart-icon" onclick="toggleCart()">🛒 السلة</div>
+      <span id="cart-count" class="cart-count">0</span>
+    </div>
+  </header>
+
+  <nav class="static-top-nav">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="sandwiches.html">🥪 السندوتشات</a>
+    <a href="shawarma.html">🌯 الشاورما</a>
+    <a href="addons.html">🍟 الإضافات</a>
+    <a href="sauces.html">🩸 الصوصات</a>
+    <a href="salads.html">🥗 السلطات</a>
+    <a href="drinks.html">🥤 المشروبات</a>
+  </nav>
+
+  <div id="cart" class="cart-panel">
+    <h2>
+      🧺 السلة
+      <button class="close-cart" onclick="toggleCart()">❌</button>
+    </h2>
+    <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
+    <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 تفريغ السلة</button>
+    <button onclick="sendOrder()" style="background:#25d366; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:10px;">
+      📦 أرسل الطلب على واتساب
+    </button>
+    <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
+  </div>
+
+  <div class="box">
+    <h1>ركن الصوصات 🩸</h1>
+  </div>
+
+
+  <section class="products">
+    <div class="product">
+      <img src="SSER.jpg" alt="صوص شيدر " />
+      <h3>صوص شيدر</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص شيدر', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="RANSH.jpg" alt="صوص رانش " />
+      <h3>صوص رانش</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص رانش', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="FIRE.jpg" alt="صوص فاير صوص HOT " />
+      <h3>صوص فاير صوص HOT</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص فاير صوص HOT', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="BARBK.jpg" alt="صوص باربكيو " />
+      <h3>صوص باربكيو</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص باربكيو', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+   <section class="products">
+    <div class="product">
+      <img src="MAYO.jpg" alt="مايونيز " />
+      <h3>مايونيز</h3>
+      <p>سعر: 5 جنيه</p>
+      <button onclick="addToCart('مايونيز', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="CATS.jpg" alt="كاتشب " />
+      <h3>كاتشب</h3>
+      <p>سعر: 5 جنيه</p>
+      <button onclick="addToCart('كاتشب', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© تصميم معاذ بهاء البدوي</p>
+  </footer>
+
+  <script src="cart.js"></script>
+</body>
+</html>
