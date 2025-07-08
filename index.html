@@ -61,19 +61,27 @@ header h1 {
 
 
     .cart-panel {
-  position: fixed;       /* ✅ تجعلها ثابتة */
+  position: fixed;
   top: 0;
-  left: 0;
+  left: 0;                     /* ✅ يظهر من الشمال */
+  right: unset;
   height: 100%;
-  width: 200px;          /* أو حسب الحجم المناسب ليك */
+  width: 280px;
+  max-width: 90%;
   background: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* ✅ يختفي على الشمال */
   transition: 0.3s;
   z-index: 1000;
-  padding: 20px;
-  overflow-y: auto;      /* ✅ لو زادت المحتويات يظهر سكرول */
+  padding: 15px;
+  overflow-y: auto;
+  font-size: 14px;
 }
+.cart-panel.show {
+  transform: translateX(0);     /* ✅ لما تتفتح */
+}
+
+
 
 
     .cart-panel.show {
@@ -187,6 +195,15 @@ header h1 {
         width: 100%;
       }
     }
+
+    @media (max-width: 500px) {
+  .cart-panel {
+    width: 90%;
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -331,12 +348,12 @@ header h1 {
 
   <section class="products">
     <div class="product">
-      <img src="sawerma.jpg" alt="" />
+      <img src="sawerma 2.jpg" alt="" />
       <h3>راب شاورما فراخ</h3>
        <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب شاورما ميكس (S)', 75)">اضف للسلة</button>
+      <button onclick="addToCart(' راب شاورما فراخ (S)', 75)">اضف للسلة</button>
       <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب شاورما ميكس (L)', 120)">اضف للسلة</button>
+      <button onclick="addToCart(' راب شاورما فراخ (L)', 120)">اضف للسلة</button>
     </div>
   </section>
 
