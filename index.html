@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Super Burger</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff6f0;
+    }
+
+    header {
+  display: flex;
+  justify-content: center;   /* أفقياً */
+  align-items: center;       /* عمودياً */
+  height: 10vh;             /* طول الشاشة بالكامل */
+  background-color: #e53935; /* اختياري */
+  text-align: center;
+}
+
+header h1 {
+  font-size: 48px;
+  color: #ffffff;
+  font-family: 'Cairo', sans-serif; /* أو أي خط يعجبك */
+  margin: 0;
+}
+
+
+    .cart-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px; /* ✅ الشمال */
+  background-color: rgb(0, 0, 0);
+  color: #9f22ff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.cart-count {
+  position: fixed;
+  top: 12px;     /* أعلى شوية من الزر */
+  left: 60px;    /* يمين الزر شويه */
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  font-weight: bold;
+  z-index: 1101;
+}
+
+
+
+    .cart-panel {
+  position: fixed;       /* ✅ تجعلها ثابتة */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;          /* أو حسب الحجم المناسب ليك */
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transform: translateX(-100%);
+  transition: 0.3s;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;      /* ✅ لو زادت المحتويات يظهر سكرول */
+}
+
+
+    .cart-panel.show {
+      transform: translateX(0);
+    }
+
+    .cart-panel h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-cart {
+      cursor: pointer;
+      font-size: 20px;
+      color: #ff5722;
+      border: none;
+      background: none;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      padding: 15px;
+      background: #f9f9f9;
+}
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .product img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* ✅ بدل cover */
+  border-radius: 8px;
+  background: #fff;
+}
+
+
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+
+    .product button {
+      background: #ff5722;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    .footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  margin-top: 50px; /* مسافة بسيطة فوقه */
+}
+
+
+    .box {
+  display: flex;
+  justify-content: center;   /* أفقياً */
+  align-items: center;       /* عمودياً */
+  height: 200px;             /* لازم تحدد ارتفاع */
+  text-align: center;
+  background: #00c3ff;
+}
+
+
+    .total {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .cart-panel {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1> Super Burger</h1>
+    <!-- داخل header -->
+<div style="position: relative;">
+  <div class="cart-icon" onclick="toggleCart()">🛒 السلة</div>
+  <span id="cart-count" class="cart-count">0</span>
+</div>
+
+
+  </header>
+
+  <!-- داخل السلة -->
+<div id="cart" class="cart-panel">
+  <h2>
+    🧺 السلة
+    <button class="close-cart" onclick="toggleCart()">❌</button>
+  </h2>
+
+  <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
+
+  <!-- ✅ زر تفريغ السلة -->
+  <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 تفريغ السلة</button>
+<!-- تحت زر تفريغ السلة -->
+<button onclick="sendOrder()" style="background:#25d366; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:10px;">
+  📦 أرسل الطلب على واتساب
+</button>
+
+  <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
+</div>
+
+<div class="box">
+  <h1>ركن السندوتشات 🍔 </h1>
+</div>
+
+  <section class="products">
+    <div class="product">
+      <img src="SINGLE.jpg" alt="بيف برجر (Single)" />
+      <h3>بيف برجر(Single) </h3>
+      <p>سعر: 90 جنيه</p>
+      <button onclick="addToCart(' بيف برجر (Single) ', 90)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="DOUBLE.jpg" alt="بيف برجر (Double)" />
+      <h3>بيف برجر(Double) </h3>
+      <p>سعر: 140 جنيه</p>
+      <button onclick="addToCart(' بيف برجر (Double) ', 140)">اضف للسلة</button>
+    </div>
+  </section>
+
+<section class="products">
+    <div class="product">
+      <img src="triple.jpg" alt="بيف برجر (Triple)" />
+      <h3>بيف برجر(Triple) </h3>
+      <p>سعر: 195 جنيه</p>
+      <button onclick="addToCart(' بيف برجر (Triple) ', 195)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="single 2.jpg" alt="فرايد تشكن  (Single)" />
+      <h3> فرايد تشكن(Single) </h3>
+      <p>سعر: 90 جنيه</p>
+      <button onclick="addToCart('  فرايد تشكن (Single) ', 90)">اضف للسلة</button>
+    </div>
+  </section>
+
+   <section class="products">
+    <div class="product">
+      <img src="double 2.png" alt="فرايد تشكن  (Double)" />
+      <h3> فرايد تشكن(Double) </h3>
+      <p>سعر: 140 جنيه</p>
+      <button onclick="addToCart('  فرايد تشكن (Double) ', 140)">اضف للسلة</button>
+    </div>
+  </section>
+
+   <section class="products">
+    <div class="product">
+      <img src="triple 2.png" alt="فرايد تشكن  (Triple)" />
+      <h3> فرايد تشكن(Triple) </h3>
+      <p>سعر: 195 جنيه</p>
+      <button onclick="addToCart('  فرايد تشكن (Triple) ', 195)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SECN.jpg" alt="تشكن برجر (Single)" />
+      <h3>تشكن برجر(Single) </h3>
+      <p>سعر: 80 جنيه</p>
+      <button onclick="addToCart(' تشكن برجر (Single) ', 80)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SECN 2.jpg" alt="تشكن برجر (Double)" />
+      <h3>تشكن برجر(Double) </h3>
+      <p>سعر: 125 جنيه</p>
+      <button onclick="addToCart(' تشكن برجر (Double) ', 125)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SECN 3.jpg" alt="تشكن برجر (Triple)" />
+      <h3>تشكن برجر(Triple) </h3>
+      <p>سعر: 180 جنيه</p>
+      <button onclick="addToCart(' تشكن برجر (Triple) ', 180)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="MEX.png" alt="ميكس برجر" />
+      <h3>ميكس برجر</h3>
+      <p>سعر: 140 جنيه</p>
+      <button onclick="addToCart(' ميكس برجر', 140)">اضف للسلة</button>
+    </div>
+  </section>
+
+<div class="box">
+  <h1>ركن الشاورما 🌯 </h1>
+</div>
+
+
+  <section class="products">
+    <div class="product">
+      <img src="sawerma.jpg" alt="" />
+      <h3>راب شاورما ميكس </h3>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب شاورما ميكس (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="sawerma.jpg" alt="" />
+      <h3>راب شاورما فراخ</h3>
+       <p>سعر(S): 75 جنيه</p>
+      <button onclick="addToCart(' راب شاورما ميكس (S)', 75)">اضف للسلة</button>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب شاورما ميكس (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SAWERM 3.jpg" alt="" />
+      <h3>راب شاورما لحمة </h3>
+      <p>سعر(S): 75 جنيه</p>
+      <button onclick="addToCart(' راب شاورما لحمة (S)', 75)">اضف للسلة</button>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب شاورما لحمة (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="STRPS.jpg" alt="" />
+      <h3>راب ستريبس </h3>
+      <p>سعر(S): 75 جنيه</p>
+      <button onclick="addToCart(' راب ستريبس (S)', 75)">اضف للسلة</button>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب ستريبس (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SHESH.jpg" alt="" />
+      <h3>راب شيش طاووق  </h3>
+      <p>سعر(S): 75 جنيه</p>
+      <button onclick="addToCart(' راب شيش طاووق (S)', 75)">اضف للسلة</button>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب  شيش طاووق (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="HOT.jpg" alt="" />
+      <h3>راب هوت دوج  </h3>
+      <p>سعر(S): 75 جنيه</p>
+      <button onclick="addToCart(' راب هوت دوج (S)', 75)">اضف للسلة</button>
+      <p>سعر(L): 120 جنيه</p>
+      <button onclick="addToCart(' راب  هوت دوج (L)', 120)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SPESYAL.jpg" alt="" />
+      <h3>راب سبيشيال   </h3>
+      <p>سعر(S): 50 جنيه</p>
+      <button onclick="addToCart(' راب  سبيشيال (S)', 50)">اضف للسلة</button>
+      <p>سعر(L): 80 جنيه</p>
+      <button onclick="addToCart(' راب  شيش سبيشيال (L)', 80)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="BTATES.jpg" alt="" />
+      <h3>راب بطاطس   </h3>
+      <p>سعر(S): 45 جنيه</p>
+      <button onclick="addToCart(' راب  بطاطس (S)', 45)">اضف للسلة</button>
+      <p>سعر(L): 75 جنيه</p>
+      <button onclick="addToCart(' راب  شيش بطاطس (L)', 75)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <div class="box">
+  <h1>ركن الإضافات 🍟 </h1>
+</div>
+
+<section class="products">
+    <div class="product">
+      <img src="btstes.jpg" alt="باكيت بطاطس (عادي)" />
+      <h3>باكيت بطاطس (عادي)</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('باكيت بطاطس (عادي)', 15)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="sedr.jpg" alt="باكيت بطاطس (بصوص الشيدر)" />
+      <h3>باكيت بطاطس (بصوص الشيدر)</h3>
+      <p>سعر: 25 جنيه</p>
+      <button onclick="addToCart('باكيت بطاطس (بصوص الشيدر)', 25)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="becon.jpg" alt="بيف بيكون" />
+      <h3>بيف بيكون</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('بيف بيكون', 15)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="roz.jpg" alt="روز بيكون" />
+      <h3>روز بيكون</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('روز بيكون', 15)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="tprky.jpg" alt="تركي مدخن " />
+      <h3>تركي مدخن</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('تركي مدخن', 15)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="MOATZ.jpg" alt="" />
+      <h3>موتزريلا ستيك</h3>
+      <p>سعر(1-قطعة): 15 جنيه</p>
+      <button onclick="addToCart(' راب  سبيشيال (1-قطعة)', 15)">اضف للسلة</button>
+      <p>سعر(2-قطعة): 25 جنيه</p>
+      <button onclick="addToCart('موتزريلا ستيك(2-قطعة)', 25)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="BASAL.jpg" alt="حلقات البصل " />
+      <h3>حلقات البصل</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('حلقات البصل', 10)">اضف للسلة</button>
+    </div>
+  </section>
+  
+  <div class="box">
+  <h1>ركن الصوصات 🩸 </h1>
+</div>
+
+<section class="products">
+    <div class="product">
+      <img src="SSER.jpg" alt="صوص شيدر " />
+      <h3>صوص شيدر</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص شيدر', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="RANSH.jpg" alt="صوص رانش " />
+      <h3>صوص رانش</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص رانش', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="FIRE.jpg" alt="صوص فاير صوص HOT " />
+      <h3>صوص فاير صوص HOT</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص فاير صوص HOT', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="BARBK.jpg" alt="صوص باربكيو " />
+      <h3>صوص باربكيو</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('صوص باربكيو', 10)">اضف للسلة</button>
+    </div>
+  </section>
+
+   <section class="products">
+    <div class="product">
+      <img src="MAYO.jpg" alt="مايونيز " />
+      <h3>مايونيز</h3>
+      <p>سعر: 5 جنيه</p>
+      <button onclick="addToCart('مايونيز', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="CATS.jpg" alt="كاتشب " />
+      <h3>كاتشب</h3>
+      <p>سعر: 5 جنيه</p>
+      <button onclick="addToCart('كاتشب', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <div class="box">
+  <h1>ركن السلطات 🥗 </h1>
+</div>
+
+<section class="products">
+    <div class="product">
+      <img src="TOM.jpg" alt="تومية " />
+      <h3>تومية</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('تومية', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="SPAYS.jpeg" alt="تومية سبايسي " />
+      <h3>تومية سبايسي</h3>
+      <p>سعر: 10 جنيه</p>
+      <button onclick="addToCart('تومية سبايسي', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="CO;O.jpg" alt="كول سلو " />
+      <h3>كول سلو</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('كول سلو', 15)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="HALA.jpg" alt="هالبينو " />
+      <h3>هالبينو</h3>
+      <p>سعر: 5 جنيه</p>
+      <button onclick="addToCart('هالبينو', 5)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <div class="box">
+  <h1>ركن المشروبات 🍷 </h1>
+</div>
+
+<section class="products">
+    <div class="product">
+      <img src="PEPS.jpg" alt="بيبسي " />
+      <h3>بيبسي</h3>
+      <p>سعر: 20 جنيه</p>
+      <button onclick="addToCart('بيبسي', 20)">اضف للسلة</button>
+    </div>
+  </section>
+
+<section class="products">
+    <div class="product">
+      <img src="STENG.jpg" alt="ستينج " />
+      <h3>ستينج</h3>
+      <p>سعر: 20 جنيه</p>
+      <button onclick="addToCart('ستينج', 20)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="product">
+      <img src="FURY.jpg" alt="فيوري " />
+      <h3>فيوري</h3>
+      <p>سعر: 25 جنيه</p>
+      <button onclick="addToCart('فيوري', 25)">اضف للسلة</button>
+    </div>
+  </section>
+
+  <script>
+    let cartItems = [];
+
+    function toggleCart() {
+  const cart = document.getElementById("cart");
+  const cartIcon = document.querySelector(".cart-icon");
+  const cartCount = document.getElementById("cart-count");
+
+  cart.classList.toggle("show");
+
+  if (cart.classList.contains("show")) {
+    cartIcon.style.display = "none";     // ❌ أخفي الزر
+    cartCount.style.display = "none";    // ❌ أخفي العداد
+  } else {
+    cartIcon.style.display = "block";    // ✅ رجع الزر
+    cartCount.style.display = "block";   // ✅ رجع العداد
+  }
+}
+
+
+
+    function addToCart(name, price) {
+      const existingItem = cartItems.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.push({ name, price, quantity: 1 });
+      }
+      updateCartDisplay();
+      saveCart();
+
+    }
+
+    function saveCart() {
+  localStorage.setItem("superburger_cart", JSON.stringify(cartItems));
+}
+
+
+   function removeFromCart(index) {
+  if (cartItems[index].quantity > 1) {
+    cartItems[index].quantity--; // 🧮 ينقص واحدة
+  } else {
+    cartItems.splice(index, 1);  // 🗑️ لو وصلت 1 يشيل الصنف كله
+  }
+  updateCartDisplay(); // 🌀 يحدث السلة
+  saveCart();
+
+}
+
+
+    function clearCart() {
+  cartItems = [];
+  updateCartDisplay();
+  saveCart();
+
+}
+
+
+    function updateCartDisplay() {
+      const list = document.getElementById("cart-items");
+      const totalDiv = document.getElementById("total-price");
+      list.innerHTML = "";
+      const totalSandwiches = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+document.getElementById("cart-count").textContent = totalSandwiches;
+
+
+      if (cartItems.length === 0) {
+        list.innerHTML = "<p>السلة فارغة</p>";
+        totalDiv.textContent = "الإجمالي: 0 جنيه";
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        li.innerHTML = `
+          <span>${item.name} × ${item.quantity} = ${itemTotal} جنيه</span>
+          <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+        `;
+        list.appendChild(li);
+      });
+
+      totalDiv.textContent = "الإجمالي: " + total + " جنيه";
+    }
+
+    function sendOrder() {
+  if (cartItems.length === 0) {
+    alert("السلة فارغة!");
+    return;
+  }
+
+  let message = "📦 طلب جديد من Super Burger:%0A%0A";
+  let total = 0;
+  let totalItems = 0;
+
+  cartItems.forEach(item => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    totalItems += item.quantity;
+    message += `🍔 ${item.name} × ${item.quantity} = ${itemTotal} جنيه%0A`;
+  });
+
+  message += `%0A📦 عدد السندوتشات: ${totalItems}`;
+  message += `%0A💰 الإجمالي: ${total} جنيه%0A`;
+  message += `%0A📍 العنوان: [اكتب العنوان هنا]`;
+  message += `%0A📞 رقم الموبايل: [اكتب رقمك هنا]`;
+
+  // ✅ حط رقم الواتساب هنا بدون "+"
+  const phone = "201271230053"; // ← غيّر الرقم ده لرقمك
+  const url = `https://wa.me/${phone}?text=${message}`;
+  window.open(url, "_blank");
+}
+
+window.onload = function () {
+  const saved = localStorage.getItem("superburger_cart");
+  if (saved) {
+    cartItems = JSON.parse(saved);
+    updateCartDisplay();
+  }
+};
+
+
+  </script>
+  
+<footer class="footer">
+  <p>© معاذ بهاء البدوي</p>
+</footer>
+
+</body>
+</html>
