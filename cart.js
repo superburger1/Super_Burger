@@ -79,13 +79,14 @@ function sendOrder() {
     const itemTotal = item.price * item.quantity;
     total += itemTotal;
     totalItems += item.quantity;
-    message += `🍔 ${item.name} × ${item.quantity} = ${itemTotal} جنيه%0A`;
+    message += `• ${item.name} | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} جنيه\n`;
   });
 
   message += `%0A📦 عدد العناصر: ${totalItems}`;
   message += `%0A💰 الإجمالي: ${total} جنيه%0A`;
-  message += `%0A📍 العنوان: [اكتب العنوان هنا]`;
- message += `%0A📞 رقم الموبايل متاح للإتصال: [اكتب رقمك هنا]`;
+
+  const encodedMessage = encodeURIComponent(message);
+
 
   const phone = "201271230053";
   const url = `https://wa.me/${phone}?text=${message}`;

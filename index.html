@@ -264,9 +264,9 @@ header h1 {
   <!-- ✅ زر تفريغ السلة -->
   <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 تفريغ السلة</button>
 <!-- تحت زر تفريغ السلة -->
-<button onclick="sendOrder()" style="background:#25d366; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:10px;">
-  📦 أرسل الطلب على واتساب
-</button>
+<a href="info.html" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px;">
+  📦 استكمال الطلب على واتساب
+</a>
 
   <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
 </div>
@@ -396,9 +396,7 @@ document.getElementById("cart-count").textContent = totalSandwiches;
 
   message += `%0A📦 عدد السندوتشات: ${totalItems}`;
   message += `%0A💰 الإجمالي: ${total} جنيه%0A`;
-  message += `%0A📍 العنوان: [اكتب العنوان هنا]`;
-  message += `%0A📞 رقم الموبايل متاح للإتصال: [اكتب رقمك هنا]`;
-
+  
   // ✅ حط رقم الواتساب هنا بدون "+"
   const phone = "201271230053"; // ← غيّر الرقم ده لرقمك
   const url = `https://wa.me/${phone}?text=${message}`;

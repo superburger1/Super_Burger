@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معلومات التوصيل</title>
+  <style>
+    body {
+      background-image: url("super.jpg");
+    background-size: cover;        /* تغطي الشاشة بالكامل */
+    background-repeat: no-repeat;  /* ما تتكررش */
+    background-attachment: fixed;  /* تفضل ثابتة أثناء التمرير */
+    }
+
+    h2 {
+      color: #e53935;
+      text-align: center;
+    }
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #25d366;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff4ec;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    color: #d84315;
+    margin-bottom: 20px;
+  }
+
+  .form-container label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .form-container button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #25d366;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .form-container button:hover {
+    background-color: #20b85e;
+  }
+
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+  <h2>إرسال الطلب</h2>
+  <form id="orderForm" onsubmit="sendWhatsApp(event);">
+    <label for="name">الاسم (اختياري):</label>
+    <input type="text" id="name" placeholder="مثال: أحمد">
+
+    <label for="address">العنوان:</label>
+    <input type="text" id="address" placeholder="اكتب العنوان هنا" required>
+
+    <label for="phone">رقم هاتف للتواصل:</label>
+    <input type="tel" id="phone" placeholder="مثل: 01012345678" required>
+
+    <button type="submit">📦 أرسل الطلب على واتساب</button>
+  </form>
+</div>
+
+  <script>
+    function sendWhatsApp(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const phone = document.getElementById("phone").value;
+
+      const savedCart = localStorage.getItem("superburger_cart");
+      if (!savedCart) {
+        alert("السلة فارغة!");
+        return;
+      }
+
+      const cartItems = JSON.parse(savedCart);
+      let message = "طلب جديد من Super Burger:\n\n";
+let total = 0;
+
+cartItems.forEach(item => {
+  const itemTotal = item.price * item.quantity;
+  total += itemTotal;
+ message += `• ${item.name} | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} جنيه\n`;
+
+});
+
+message += `\n• الاسم: ${name}`;
+message += `\n• العنوان: ${address}`;
+message += `\n• رقم الهاتف: ${phone}`;
+message += `\n• الإجمالي: ${total} جنيه`;
+
+const encodedMessage = encodeURIComponent(message);
+
+
+const phoneNumber = "201271230053";
+const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
