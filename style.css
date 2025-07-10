@@ -20,7 +20,7 @@ header {
 }
 
 header h1 {
-  font-size: 32px;
+  font-size: 25px;
   color: white;
   margin: 0;
 }
@@ -163,7 +163,10 @@ header h1 {
 }
 
 .static-top-nav {
-      background-color: #e53935;
+      background-image: url('moaz210.jpg');
+      background-size: cover;      /* تخلي الصورة تغطي كامل النوف بار */
+  background-repeat: no-repeat;
+  background-position: center;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
