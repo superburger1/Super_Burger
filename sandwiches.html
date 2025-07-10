@@ -10,15 +10,15 @@
   <header>
     <h1>Super Burger</h1>
     <div style="position: relative;">
-      <div class="cart-icon" onclick="toggleCart()">🛒 السلة</div>
+      <div class="cart-icon" onclick="toggleCart()">🛒 أوردراتي</div>
       <span id="cart-count" class="cart-count">0</span>
     </div>
   </header>
 
   <nav class="static-top-nav">
     <a href="index.html">🏠 الرئيسية</a>
-    <a href="sandwiches.html">🥪 السندوتشات</a>
-    <a href="shawarma.html">🌯 الشاورما</a>
+    <a href="sandwiches.html"> البرجر و الفرايد تشكن 🍔</a>
+    <a href="shawarma.html"> سندوتشات السوري 🌯</a>
     <a href="addons.html">🍟 الإضافات</a>
     <a href="sauces.html">🩸 الصوصات</a>
     <a href="salads.html">🥗 السلطات</a>
@@ -27,11 +27,11 @@
 
   <div id="cart" class="cart-panel">
     <h2>
-      🧺 السلة
+      🧺 أوردراتي
       <button class="close-cart" onclick="toggleCart()">❌</button>
     </h2>
     <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
-    <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 تفريغ السلة</button>
+    <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 حذف أوردراتي </button>
     <a href="info.html" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px;">
   📦 استكمال الطلب على واتساب
 </a>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="box">
-    <h1>ركن السندوتشات 🍔</h1>
+    <h1>ركن البرجر و الفرايد تشكن 🍔</h1>
   </div>
 
   <section class="products">
@@ -47,7 +47,7 @@
       <img src="SINGLE.jpg" alt="بيف برجر (Single)" />
       <h3>بيف برجر(Single) </h3>
       <p>سعر: 90 جنيه</p>
-      <button onclick="addToCart(' بيف برجر (Single) ', 90)">اضف للسلة</button>
+      <button onclick="addToCart(' بيف برجر (Single) ', 90)">أضافة</button>
     </div>
   </section>
 
@@ -56,7 +56,7 @@
       <img src="DOUBLE.jpg" alt="بيف برجر (Double)" />
       <h3>بيف برجر(Double) </h3>
       <p>سعر: 140 جنيه</p>
-      <button onclick="addToCart(' بيف برجر (Double) ', 140)">اضف للسلة</button>
+      <button onclick="addToCart(' بيف برجر (Double) ', 140)">أضافة</button>
     </div>
   </section>
 
@@ -65,7 +65,7 @@
       <img src="triple.jpg" alt="بيف برجر (Triple)" />
       <h3>بيف برجر(Triple) </h3>
       <p>سعر: 195 جنيه</p>
-      <button onclick="addToCart(' بيف برجر (Triple) ', 195)">اضف للسلة</button>
+      <button onclick="addToCart(' بيف برجر (Triple) ', 195)">أضافة</button>
     </div>
   </section>
 
@@ -74,7 +74,7 @@
       <img src="single 2.jpg" alt="فرايد تشكن  (Single)" />
       <h3> فرايد تشكن(Single) </h3>
       <p>سعر: 90 جنيه</p>
-      <button onclick="addToCart('  فرايد تشكن (Single) ', 90)">اضف للسلة</button>
+      <button onclick="addToCart('  فرايد تشكن (Single) ', 90)">أضافة</button>
     </div>
   </section>
 
@@ -83,7 +83,7 @@
       <img src="double 2.png" alt="فرايد تشكن  (Double)" />
       <h3> فرايد تشكن(Double) </h3>
       <p>سعر: 140 جنيه</p>
-      <button onclick="addToCart('  فرايد تشكن (Double) ', 140)">اضف للسلة</button>
+      <button onclick="addToCart('  فرايد تشكن (Double) ', 140)">أضافة</button>
     </div>
   </section>
 
@@ -92,7 +92,7 @@
       <img src="triple 2.png" alt="فرايد تشكن  (Triple)" />
       <h3> فرايد تشكن(Triple) </h3>
       <p>سعر: 195 جنيه</p>
-      <button onclick="addToCart('  فرايد تشكن (Triple) ', 195)">اضف للسلة</button>
+      <button onclick="addToCart('  فرايد تشكن (Triple) ', 195)">أضافة</button>
     </div>
   </section>
 
@@ -101,7 +101,7 @@
       <img src="SECN.jpg" alt="تشكن برجر (Single)" />
       <h3>تشكن برجر(Single) </h3>
       <p>سعر: 80 جنيه</p>
-      <button onclick="addToCart(' تشكن برجر (Single) ', 80)">اضف للسلة</button>
+      <button onclick="addToCart(' تشكن برجر (Single) ', 80)">أضافة</button>
     </div>
   </section>
 
@@ -110,7 +110,7 @@
       <img src="SECN 2.jpg" alt="تشكن برجر (Double)" />
       <h3>تشكن برجر(Double) </h3>
       <p>سعر: 125 جنيه</p>
-      <button onclick="addToCart(' تشكن برجر (Double) ', 125)">اضف للسلة</button>
+      <button onclick="addToCart(' تشكن برجر (Double) ', 125)">أضافة</button>
     </div>
   </section>
 
@@ -119,7 +119,7 @@
       <img src="SECN 3.jpg" alt="تشكن برجر (Triple)" />
       <h3>تشكن برجر(Triple) </h3>
       <p>سعر: 180 جنيه</p>
-      <button onclick="addToCart(' تشكن برجر (Triple) ', 180)">اضف للسلة</button>
+      <button onclick="addToCart(' تشكن برجر (Triple) ', 180)">أضافة</button>
     </div>
   </section>
 
@@ -128,7 +128,7 @@
       <img src="MEX.png" alt="ميكس برجر" />
       <h3>ميكس برجر</h3>
       <p>سعر: 140 جنيه</p>
-      <button onclick="addToCart(' ميكس برجر', 140)">اضف للسلة</button>
+      <button onclick="addToCart(' ميكس برجر', 140)">أضافة</button>
     </div>
   </section>
 

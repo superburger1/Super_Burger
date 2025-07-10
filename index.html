@@ -14,11 +14,16 @@
 
     header {
   display: flex;
-  justify-content: center;   /* أفقياً */
-  align-items: center;       /* عمودياً */
-  height: 10vh;             /* طول الشاشة بالكامل */
-  background-color: #e53935; /* اختياري */
-  text-align: center;
+  justify-content: center;         /* توسيط أفقي */
+  align-items: center;             /* توسيط رأسي */
+  height: 150px;                   /* تقدر تغير الطول حسب ما تحب */
+  background-image: url('moaz2.jpg');  /* ← غيّرها لمسار الصورة اللي عندك */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px black;
 }
 
 header h1 {
@@ -176,7 +181,7 @@ header h1 {
   align-items: center;       /* عمودياً */
   height: 150px;             /* لازم تحدد ارتفاع */
   text-align: center;
-  background: #00c3ff;
+  background: #ff8120;
 }
 
 
@@ -185,6 +190,34 @@ header h1 {
       font-weight: bold;
       color: #333;
     }
+
+    .category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.category-card {
+  background-color: #fff8f0;
+  color: #d84315;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  background-color: #ffe0c4;
+  transform: translateY(-5px);
+}
+
 
     @media (max-width: 600px) {
       header h1 {
@@ -205,7 +238,7 @@ header h1 {
 }
 
 .static-top-nav {
-  background-color: #e53935;
+  background-color: #000000;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -237,32 +270,33 @@ header h1 {
     <h1> Super Burger</h1>
     <!-- داخل header -->
 <div style="position: relative;">
-  <div class="cart-icon" onclick="toggleCart()">🛒 السلة</div>
+  <div class="cart-icon" onclick="toggleCart()">🛒 أوردراتي</div>
   <span id="cart-count" class="cart-count">0</span>
 </div>
 
 
   </header>
-<nav class="static-top-nav">
-  <a href="sandwiches.html">🥪 السندوتشات</a>
-  <a href="shawarma.html">🌯 الشاورما</a>
-  <a href="addons.html">🍟 الإضافات</a>
-  <a href="sauces.html">🩸 الصوصات</a>
-  <a href="salads.html">🥗 السلطات</a>
-  <a href="drinks.html">🥤 المشروبات</a>
-</nav>
+<section class="category-grid">
+  <a href="sandwiches.html" class="category-card"> ركن البرجر و الفرايد تشكن 🍔 </a>
+  <a href="shawarma.html" class="category-card"> ركن سندوتشات السوري 🌯 </a>
+  <a href="addons.html" class="category-card"> ركن الإضافات 🧀</a>
+  <a href="sauces.html" class="category-card"> ركن الصوصات 🥫</a>
+  <a href="salads.html" class="category-card"> ركن السلطات 🥗</a>
+  <a href="drinks.html" class="category-card"> ركن المشروبات 🥤</a>
+</section>
+
 
   <!-- داخل السلة -->
 <div id="cart" class="cart-panel">
   <h2>
-    🧺 السلة
+    🧺 أوردراتي
     <button class="close-cart" onclick="toggleCart()">❌</button>
   </h2>
 
   <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
 
   <!-- ✅ زر تفريغ السلة -->
-  <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 تفريغ السلة</button>
+  <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 حذف أوردراتي </button>
 <!-- تحت زر تفريغ السلة -->
 <a href="info.html" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px;">
   📦 استكمال الطلب على واتساب
@@ -272,19 +306,7 @@ header h1 {
 </div>
 
 
-
-  <div class="box">
-  <h1>الأكثر مبيعا</h1>
-</div>
-
-<section class="products">
-    <div class="product">
-      <img src="single 2.jpg" alt="فرايد تشكن  (Single)" />
-      <h3> فرايد تشكن(Single) </h3>
-      <p>سعر: 90 جنيه</p>
-      <button onclick="addToCart('  فرايد تشكن (Single) ', 90)">اضف للسلة</button>
-    </div>
-  </section>
+ 
 
 
   <script>
@@ -354,7 +376,7 @@ document.getElementById("cart-count").textContent = totalSandwiches;
 
 
       if (cartItems.length === 0) {
-        list.innerHTML = "<p>السلة فارغة</p>";
+        list.innerHTML = "<p>أوردراتي فارغة</p>";
         totalDiv.textContent = "الإجمالي: 0 جنيه";
         return;
       }
@@ -379,7 +401,7 @@ document.getElementById("cart-count").textContent = totalSandwiches;
 
     function sendOrder() {
   if (cartItems.length === 0) {
-    alert("السلة فارغة!");
+    alert("أوردراتي فارغة!");
     return;
   }
 

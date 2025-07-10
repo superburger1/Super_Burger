@@ -7,12 +7,16 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh;
-  background-color: #e53935;
-  text-align: center;
-  position: relative;
+  justify-content: center;         /* توسيط أفقي */
+  align-items: center;             /* توسيط رأسي */
+  height: 150px;                   /* تقدر تغير الطول حسب ما تحب */
+  background-image: url('moaz2.jpg');  /* ← غيّرها لمسار الصورة اللي عندك */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px black;
 }
 
 header h1 {
@@ -155,7 +159,7 @@ header h1 {
   justify-content: center;
   align-items: center;
   height: 150px;
-  background: #00c3ff;
+  background: #ff8120;
 }
 
 .static-top-nav {

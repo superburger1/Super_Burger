@@ -44,7 +44,7 @@ function updateCartDisplay() {
   document.getElementById("cart-count").textContent = totalSandwiches;
 
   if (cartItems.length === 0) {
-    list.innerHTML = "<p>السلة فارغة</p>";
+    list.innerHTML = "<p>أوردراتي فارغة</p>";
     totalDiv.textContent = "الإجمالي: 0 جنيه";
     return;
   }
