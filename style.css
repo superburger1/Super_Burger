@@ -2,7 +2,10 @@ body {
   font-family: 'Cairo', sans-serif;
   margin: 0;
   padding: 0;
-  background: #fff6f0;
+  background-image: url("moaz23 (4).jpg");
+  background-size: cover;           /* تخلي الصورة تغطي الشاشة */
+  background-repeat: no-repeat;     /* ما تتكررش */
+  background-attachment: fixed;     /* تفضل ثابتة لما تعمل سكرول */
 }
 
 header {
