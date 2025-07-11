@@ -51,12 +51,12 @@ function updateCartDisplay() {
 
   let total = 0;
   cartItems.forEach((item, index) => {
-    const itemTotal = item.price * item.quantity;
+    const itemTotal = item.quantity * item.price;
     total += itemTotal;
     const li = document.createElement("li");
     li.className = "cart-item";
     li.innerHTML = `
-      <span>${item.name} × ${item.quantity} = ${itemTotal} جنيه</span>
+      <span>${item.name} × ${itemTotal} = ${item.quantity} جنيه</span>
       <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
     `;
     list.appendChild(li);
@@ -76,10 +76,10 @@ function sendOrder() {
   let totalItems = 0;
 
   cartItems.forEach(item => {
-    const itemTotal = item.price * item.quantity;
+    const itemTotal = item.quantity * item.price;
     total += itemTotal;
     totalItems += item.quantity;
-    message += `• ${item.name} | الكمية: ${item.quantity} | السعر: ${item.price * item.quantity} جنيه\n`;
+    message += `🍔 ${item.name} × ${item.quantity} = ${itemTotal} جنيه%0A`;
   });
 
   message += `%0A📦 عدد العناصر: ${totalItems}`;

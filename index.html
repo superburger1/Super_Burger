@@ -393,20 +393,18 @@ document.getElementById("cart-count").textContent = totalSandwiches;
         return;
       }
 
-      let total = 0;
-
-      cartItems.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.className = "cart-item";
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-
-        li.innerHTML = `
-          <span>${item.name} × ${item.quantity} = ${itemTotal} جنيه</span>
-          <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
-        `;
-        list.appendChild(li);
-      });
+     let total = 0;
+  cartItems.forEach((item, index) => {
+    const itemTotal = item.quantity * item.price;
+    total += itemTotal;
+    const li = document.createElement("li");
+    li.className = "cart-item";
+    li.innerHTML = `
+      <span>${item.name} × ${itemTotal} = ${item.quantity} جنيه</span>
+      <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+    `;
+    list.appendChild(li);
+  });
 
       totalDiv.textContent = "الإجمالي: " + total + " جنيه";
     }
