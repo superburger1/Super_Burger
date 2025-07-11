@@ -297,12 +297,22 @@ header h1 {
 
   <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
 
-  <!-- ✅ زر تفريغ السلة -->
-  <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">🧹 حذف أوردراتي </button>
-<!-- تحت زر تفريغ السلة -->
-<a href="info.html" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px;">
+  <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">
+  🧹 حذف أوردراتي
+</button>
+
+<!-- زر استكمال الطلب -->
+<button onclick="checkCartAndShowMessage()" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px; cursor:pointer;">
   📦 استكمال الطلب على واتساب
-</a>
+</button>
+
+<!-- الرسالة عند السلة الفارغة -->
+<div id="empty-message" style="display: none; text-align: center; padding: 20px; margin-top: 20px;">
+  <div style="background: #fff4f4; border: 2px dashed #e53935; color: #d32f2f; padding: 20px; border-radius: 10px; font-size: 18px; width: 80%; margin: auto;">
+    ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
+  </div>
+</div>
+
 
   <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
 </div>
@@ -436,6 +446,19 @@ window.onload = function () {
   }
 };
 
+function checkCartAndShowMessage() {
+    const savedCart = localStorage.getItem("superburger_cart");
+    const messageBox = document.getElementById("empty-message");
+
+    if (!savedCart || JSON.parse(savedCart).length === 0) {
+      messageBox.style.display = "block";
+      setTimeout(() => {
+        messageBox.style.display = "none";
+      }, 5000);
+    } else {
+      window.location.href = "info.html";
+    }
+  }
 
   </script>
   

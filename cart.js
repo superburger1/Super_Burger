@@ -97,6 +97,20 @@ function saveCart() {
   localStorage.setItem("superburger_cart", JSON.stringify(cartItems));
 }
 
+function checkCartAndShowMessage() {
+    const savedCart = localStorage.getItem("superburger_cart");
+    const messageBox = document.getElementById("empty-message");
+
+    if (!savedCart || JSON.parse(savedCart).length === 0) {
+      messageBox.style.display = "block";
+      setTimeout(() => {
+        messageBox.style.display = "none";
+      }, 5000);
+    } else {
+      window.location.href = "info.html";
+    }
+  }
+
 
 
 window.onload = function () {
