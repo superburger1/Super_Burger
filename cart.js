@@ -97,6 +97,8 @@ function saveCart() {
   localStorage.setItem("superburger_cart", JSON.stringify(cartItems));
 }
 
+
+
 window.onload = function () {
   const saved = localStorage.getItem("superburger_cart");
   if (saved) {
