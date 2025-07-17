@@ -31,6 +31,10 @@
       <button class="close-cart" onclick="toggleCart()">❌</button>
     </h2>
     <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
+    <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">
+  🧹 حذف أوردراتي
+</button>
+
     <!-- زر استكمال الطلب -->
 <button onclick="checkCartAndShowMessage()" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px; cursor:pointer;">
   📦 استكمال الطلب على واتساب
@@ -56,7 +60,7 @@
       <img src="TOM.jpg" alt="تومية " />
       <h3>تومية</h3>
       <p>سعر: 10 جنيه</p>
-      <button onclick="addToCart('تومية', 5)">أضافة</button>
+      <button onclick="addToCart('تومية', 10)">أضافة</button>
     </div>
   </section>
 
@@ -65,7 +69,7 @@
       <img src="SPAYS.jpeg" alt="تومية سبايسي " />
       <h3>تومية سبايسي</h3>
       <p>سعر: 10 جنيه</p>
-      <button onclick="addToCart('تومية سبايسي', 5)">أضافة</button>
+      <button onclick="addToCart('تومية سبايسي', 10)">أضافة</button>
     </div>
   </section>
 
