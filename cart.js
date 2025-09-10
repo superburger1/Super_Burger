@@ -56,14 +56,15 @@ function updateCartDisplay() {
     const li = document.createElement("li");
     li.className = "cart-item";
     li.innerHTML = `
-      <span>${item.name} × ${itemTotal} = ${item.quantity} جنيه</span>
-      <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
-    `;
+  <span>${item.name} × ${item.quantity} = ${itemTotal} جنيه</span>
+  <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+`;
+
     list.appendChild(li);
   });
 
   totalDiv.textContent = "الإجمالي: " + total + " جنيه";
-}
+} 
 
 function sendOrder() {
   if (cartItems.length === 0) {
