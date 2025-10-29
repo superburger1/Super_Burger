@@ -1,4 +1,59 @@
 <!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - الصفحة غير موجودة او تحت الصيانة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        h1 {
+            font-size: 72px;
+            color: #4CAF50; /* اللون الأخضر */
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #4CAF50;
+            }
+            to {
+                text-shadow: 0 0 20px #4CAF50;
+            }
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>الصفحة التي تبحث عنها غير موجودة او تحت الصيانة.</p>
+    </div>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -33,15 +88,15 @@
     <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
     <button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">
   🧹 حذف أوردراتي
-</button>
+</button> -->
 
 <!-- زر استكمال الطلب -->
-<button onclick="checkCartAndShowMessage()" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px; cursor:pointer;">
+<!-- <button onclick="checkCartAndShowMessage()" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px; cursor:pointer;">
   📦 استكمال الطلب على واتساب
-</button>
+</button> -->
 
 <!-- الرسالة عند السلة الفارغة -->
-<div id="empty-message" style="display: none; text-align: center; padding: 20px; margin-top: 20px;">
+<!-- <div id="empty-message" style="display: none; text-align: center; padding: 20px; margin-top: 20px;">
   <div style="background: #fff4f4; border: 2px dashed #e53935; color: #d32f2f; padding: 20px; border-radius: 10px; font-size: 18px; width: 80%; margin: auto;">
     ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
   </div>
@@ -150,4 +205,4 @@
 
   <script src="cart.js"></script>
 </body>
-</html>
+</html> -->
