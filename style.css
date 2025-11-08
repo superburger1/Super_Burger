@@ -83,7 +83,7 @@ header h1 {
   transform: translateX(100%); /* يختفي على اليمين */
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
-  padding: 20px;
+  padding: 2px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
