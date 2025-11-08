@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Super Burger - ركن سندوتشات السوري </title>
+  <title>Super Burger - ركن سندوتشات السوري</title>
+  <!-- ربط ملف CSS الخارجي -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Super Burger</h1>
-    <div style="position: relative;">
+    <div class="cart-container">
       <div class="cart-icon" onclick="toggleCart()">🛒 أوردراتي</div>
       <span id="cart-count" class="cart-count">0</span>
     </div>
@@ -18,134 +19,136 @@
   <nav class="static-top-nav">
     <a href="index.html">🏠 الرئيسية</a>
     <a href="sandwiches.html"> البرجر و الفرايد تشكن 🍔</a>
-    <a href="shawarma.html"> سندوتشات السوري 🌯</a>
+    <a href="shawarma.html" class="active"> سندوتشات السوري 🌯</a>
     <a href="addons.html">🍟 الإضافات</a>
     <a href="sauces.html">🩸 الصوصات</a>
     <a href="salads.html">🥗 السلطات</a>
     <a href="drinks.html">🥤 المشروبات</a>
   </nav>
 
+  <!-- لوحة السلة الجانبية (تم نقلها من الكود الأصلي) -->
   <div id="cart" class="cart-panel">
     <h2>
       🧺 أوردراتي
       <button class="close-cart" onclick="toggleCart()">❌</button>
     </h2>
-    <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
-
-<button onclick="clearCart()" style="background:#e0b700; color:#ffffff; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; margin-top:10px;">
-  🧹 حذف أوردراتي
-</button>
-
-    <!-- زر استكمال الطلب -->
-<button onclick="checkCartAndShowMessage()" style="background:#25d366; color:white; text-decoration:none; padding:10px 15px; display:inline-block; border-radius:5px; margin-top:10px; cursor:pointer;">
-  📦 استكمال الطلب على واتساب
-</button>
-
-<!-- الرسالة عند السلة الفارغة -->
-<div id="empty-message" style="display: none; text-align: center; padding: 20px; margin-top: 20px;">
-  <div style="background: #fff4f4; border: 2px dashed #e53935; color: #d32f2f; padding: 20px; border-radius: 10px; font-size: 18px; width: 80%; margin: auto;">
-    ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
-  </div>
-</div>
+    <ul id="cart-items">
+      <!-- سيتم إضافة عناصر السلة هنا بواسطة JavaScript -->
+    </ul>
 
     <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
+
+    <div class="cart-actions">
+      <button id="checkout-btn" onclick="checkCartAndShowMessage()">
+        📦 استكمال الطلب على واتساب
+      </button>
+      <button id="clear-cart-btn" onclick="clearCart()">
+        🧹 حذف أوردراتي
+      </button>
+    </div>
+
+    <!-- الرسالة عند السلة الفارغة -->
+    <div id="empty-message">
+      <div>
+        ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
+      </div>
+    </div>
   </div>
 
-  <div class="box">
-    <h1>ركن سندوتشات السوري 🌯</h1>
-  </div>
-
-
-  <section class="products">
-    <div class="product">
-      <img src="sawerma.jpg" alt="" />
-      <h3>راب شاورما ميكس </h3>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب شاورما ميكس (L)', 120)">أضافة</button>
+  <main>
+    <div class="box">
+      <h1>ركن سندوتشات السوري 🌯</h1>
     </div>
-  </section>
 
-  <section class="products">
-    <div class="product">
-      <img src="sawerma 2.jpg" alt="" />
-      <h3>راب شاورما فراخ</h3>
-       <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب شاورما فراخ (S)', 75)">أضافة</button>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب شاورما فراخ (L)', 120)">أضافة</button>
-    </div>
-  </section>
+    <!-- دمج جميع المنتجات في قسم واحد لتحسين الهيكلة -->
+    <section class="products">
+      <!-- راب شاورما ميكس -->
+      <div class="product">
+        <img src="sawerma.jpg" alt="راب شاورما ميكس" />
+        <h3>راب شاورما ميكس</h3>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب شاورما ميكس (L)', 120)">أضف للسلة</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="SAWERM 3.jpg" alt="" />
-      <h3>راب شاورما لحمة </h3>
-      <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب شاورما لحمة (S)', 75)">أضافة</button>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب شاورما لحمة (L)', 120)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب شاورما فراخ -->
+      <div class="product">
+        <img src="sawerma 2.jpg" alt="راب شاورما فراخ" />
+        <h3>راب شاورما فراخ</h3>
+        <p>سعر (S): 75 جنيه</p>
+        <button onclick="addToCart('راب شاورما فراخ (S)', 75)">أضف للسلة (S)</button>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب شاورما فراخ (L)', 120)">أضف للسلة (L)</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="STRPS.jpg" alt="" />
-      <h3>راب ستريبس </h3>
-      <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب ستريبس (S)', 75)">أضافة</button>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب ستريبس (L)', 120)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب شاورما لحمة -->
+      <div class="product">
+        <img src="SAWERM 3.jpg" alt="راب شاورما لحمة" />
+        <h3>راب شاورما لحمة</h3>
+        <p>سعر (S): 75 جنيه</p>
+        <button onclick="addToCart('راب شاورما لحمة (S)', 75)">أضف للسلة (S)</button>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب شاورما لحمة (L)', 120)">أضف للسلة (L)</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="SHESH.jpg" alt="" />
-      <h3>راب شيش طاووق  </h3>
-      <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب شيش طاووق (S)', 75)">أضافة</button>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب  شيش طاووق (L)', 120)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب ستريبس -->
+      <div class="product">
+        <img src="STRPS.jpg" alt="راب ستريبس" />
+        <h3>راب ستريبس</h3>
+        <p>سعر (S): 75 جنيه</p>
+        <button onclick="addToCart('راب ستريبس (S)', 75)">أضف للسلة (S)</button>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب ستريبس (L)', 120)">أضف للسلة (L)</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="HOT.jpg" alt="" />
-      <h3>راب هوت دوج  </h3>
-      <p>سعر(S): 75 جنيه</p>
-      <button onclick="addToCart(' راب هوت دوج (S)', 75)">أضافة</button>
-      <p>سعر(L): 120 جنيه</p>
-      <button onclick="addToCart(' راب  هوت دوج (L)', 120)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب شيش طاووق -->
+      <div class="product">
+        <img src="SHESH.jpg" alt="راب شيش طاووق" />
+        <h3>راب شيش طاووق</h3>
+        <p>سعر (S): 75 جنيه</p>
+        <button onclick="addToCart('راب شيش طاووق (S)', 75)">أضف للسلة (S)</button>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب شيش طاووق (L)', 120)">أضف للسلة (L)</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="SPESYAL.jpg" alt="" />
-      <h3>راب سبيشيال   </h3>
-      <p>سعر(S): 50 جنيه</p>
-      <button onclick="addToCart(' راب  سبيشيال (S)', 50)">أضافة</button>
-      <p>سعر(L): 80 جنيه</p>
-      <button onclick="addToCart(' راب  شيش سبيشيال (L)', 80)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب هوت دوج -->
+      <div class="product">
+        <img src="HOT.jpg" alt="راب هوت دوج" />
+        <h3>راب هوت دوج</h3>
+        <p>سعر (S): 75 جنيه</p>
+        <button onclick="addToCart('راب هوت دوج (S)', 75)">أضف للسلة (S)</button>
+        <p>سعر (L): 120 جنيه</p>
+        <button onclick="addToCart('راب هوت دوج (L)', 120)">أضف للسلة (L)</button>
+      </div>
 
-  <section class="products">
-    <div class="product">
-      <img src="BTATES.jpg" alt="" />
-      <h3>راب بطاطس   </h3>
-      <p>سعر(S): 45 جنيه</p>
-      <button onclick="addToCart(' راب  بطاطس (S)', 45)">أضافة</button>
-      <p>سعر(L): 75 جنيه</p>
-      <button onclick="addToCart(' راب  شيش بطاطس (L)', 75)">أضافة</button>
-    </div>
-  </section>
+      <!-- راب سبيشيال -->
+      <div class="product">
+        <img src="SPESYAL.jpg" alt="راب سبيشيال" />
+        <h3>راب سبيشيال</h3>
+        <p>سعر (S): 50 جنيه</p>
+        <button onclick="addToCart('راب سبيشيال (S)', 50)">أضف للسلة (S)</button>
+        <p>سعر (L): 80 جنيه</p>
+        <!-- تصحيح اسم المنتج في الكود الأصلي: ' راب شيش سبيشيال (L)' إلى 'راب سبيشيال (L)' -->
+        <button onclick="addToCart('راب سبيشيال (L)', 80)">أضف للسلة (L)</button>
+      </div>
+
+      <!-- راب بطاطس -->
+      <div class="product">
+        <img src="BTATES.jpg" alt="راب بطاطس" />
+        <h3>راب بطاطس</h3>
+        <p>سعر (S): 45 جنيه</p>
+        <button onclick="addToCart('راب بطاطس (S)', 45)">أضف للسلة (S)</button>
+        <p>سعر (L): 75 جنيه</p>
+        <!-- تصحيح اسم المنتج في الكود الأصلي: ' راب شيش بطاطس (L)' إلى 'راب بطاطس (L)' -->
+        <button onclick="addToCart('راب بطاطس (L)', 75)">أضف للسلة (L)</button>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <p><a href="about.html" style="color: white; text-decoration: none;">© تصميم معاذ بهاء البدوي</a></p>
   </footer>
 
+  <!-- ربط ملف JavaScript الخارجي -->
   <script src="cart.js"></script>
 </body>
 </html>
