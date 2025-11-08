@@ -135,9 +135,8 @@ function checkCartAndShowMessage() {
       alert("أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.");
     }
   } else {
-    // إذا كانت السلة مليئة، يتم إرسال الطلب عبر واتساب
-    sendOrder();
-  }
+      window.location.href = "info.html";
+    }
 }
 
 // 9. إرسال الطلب عبر واتساب
@@ -152,6 +151,7 @@ function sendOrder() {
     totalItems += item.quantity;
     message += `🍔 ${item.quantity} × ${item.name} = ${itemTotal.toFixed(2)} ج.م\n`;
   });
+  
 
   message += `\n📦 عدد الأصناف: ${cartItems.length}`;
   message += `\n🍔 عدد السندوتشات الإجمالي: ${totalItems}`;

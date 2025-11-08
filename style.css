@@ -75,7 +75,7 @@ header h1 {
   position: fixed;
   top: 0;
   right: 0; /* يظهر من اليمين في RTL */
-  height: 95%;
+  height: 90%;
   width: 300px;
   max-width: 90%;
   background: white;
@@ -83,7 +83,7 @@ header h1 {
   transform: translateX(100%); /* يختفي على اليمين */
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
-  padding: 2px;
+  padding: 1px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;

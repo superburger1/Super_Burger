@@ -78,7 +78,7 @@
       position: fixed;
       top: 0;
       right: 0; /* تغيير من left إلى right ليظهر من اليمين في RTL */
-      height: 95%;
+      height: 90%;
       width: 300px; /* زيادة العرض قليلاً */
       max-width: 90%;
       background: white;
@@ -86,7 +86,7 @@
       transform: translateX(100%); /* يختفي على اليمين */
       transition: transform 0.3s ease-in-out;
       z-index: 1000;
-      padding: 20px;
+      padding: 1px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -472,9 +472,8 @@
           messageBox.style.display = "none";
         }, 5000);
       } else {
-        // إذا كانت السلة مليئة، يتم إرسال الطلب عبر واتساب
-        sendOrder();
-      }
+      window.location.href = "info.html";
+    }
     }
 
     // 9. إرسال الطلب عبر واتساب
