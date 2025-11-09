@@ -13,7 +13,32 @@ window.onload = function () {
       cartItems = []; // مسح السلة لو حدث خطأ في التحميل
     }
   }
+
+  // إضافة مستمع حدث لإغلاق السلة عند النقر خارجها
+  document.addEventListener('click', function(event) {
+    const cart = document.getElementById("cart");
+    const cartIcon = document.querySelector(".cart-icon");
+    
+    // التحقق مما إذا كانت السلة مفتوحة
+    if (cart.classList.contains("show")) {
+      // التحقق مما إذا كان النقر خارج السلة وخارج أيقونة السلة
+      if (!cart.contains(event.target) && !cartIcon.contains(event.target)) {
+        toggleCart();
+      }
+    }
+  });
 };
+  const saved = localStorage.getItem("superburger_cart");
+  if (saved) {
+    try {
+      cartItems = JSON.parse(saved);
+      updateCartDisplay();
+    } catch (e) {
+      console.error("Error parsing cart from localStorage:", e);
+      cartItems = []; // مسح السلة لو حدث خطأ في التحميل
+    }
+  }
+
 
 // 2. حفظ السلة في التخزين المحلي
 function saveCart() {
@@ -151,7 +176,6 @@ function sendOrder() {
     totalItems += item.quantity;
     message += `🍔 ${item.quantity} × ${item.name} = ${itemTotal.toFixed(2)} ج.م\n`;
   });
-  
 
   message += `\n📦 عدد الأصناف: ${cartItems.length}`;
   message += `\n🍔 عدد السندوتشات الإجمالي: ${totalItems}`;
