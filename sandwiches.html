@@ -1,11 +1,52 @@
 <!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>الموقع معطّل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .message {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>الموقع معطّل حالياً</h1>
+        <p>نأسف للإزعاج. الموقع تحت الصيانة. يرجى المحاولة لاحقاً.</p>
+    </div>
+</body>
+</html>
+    
+<!--<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Super Burger - ركن البرجر و الفرايد تشكن</title>
+  <title>Super Burger - ركن البرجر و الفرايد تشكن</title>-->
   <!-- ربط ملف CSS الخارجي -->
-  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -24,17 +65,17 @@
     <a href="sauces.html">🩸 الصوصات</a>
     <a href="salads.html">🥗 السلطات</a>
     <a href="drinks.html">🥤 المشروبات</a>
-  </nav>
+  </nav>-->
 
   <!-- لوحة السلة الجانبية (تم نقلها من الكود الأصلي) -->
-  <div id="cart" class="cart-panel">
+  <!--<div id="cart" class="cart-panel">
     <h2>
       🧺 أوردراتي
       <button class="close-cart" onclick="toggleCart()">❌</button>
     </h2>
-    <ul id="cart-items">
+    <ul id="cart-items">-->
       <!-- سيتم إضافة عناصر السلة هنا بواسطة JavaScript -->
-    </ul>
+    <!--</ul>
 
     <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
 
@@ -45,10 +86,10 @@
       <button id="clear-cart-btn" onclick="clearCart()">
         🧹 حذف أوردراتي
       </button>
-    </div>
+    </div>-->
 
     <!-- الرسالة عند السلة الفارغة -->
-    <div id="empty-message">
+    <!--<div id="empty-message">
       <div>
         ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
       </div>
@@ -58,84 +99,84 @@
   <main>
     <div class="box">
       <h1>ركن البرجر و الفرايد تشكن 🍔</h1>
-    </div>
+    </div>-->
 
     <!-- دمج جميع المنتجات في قسم واحد لتحسين الهيكلة -->
-    <section class="products">
+    <!--<section class="products">-->
       <!-- بيف برجر (Single) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="SINGLE.jpg" alt="بيف برجر (Single)" />
         <h3>بيف برجر (Single)</h3>
         <p>سعر: 90 جنيه</p>
         <button onclick="addToCart('بيف برجر (Single)', 90)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- بيف برجر (Double) -->
-      <div class="product">
+      <!-- <div class="product">
         <img src="DOUBLE.jpg" alt="بيف برجر (Double)" />
         <h3>بيف برجر (Double)</h3>
         <p>سعر: 140 جنيه</p>
         <button onclick="addToCart('بيف برجر (Double)', 140)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- بيف برجر (Triple) -->
-      <div class="product">
+      <!-- <div class="product">
         <img src="triple.jpg" alt="بيف برجر (Triple)" />
         <h3>بيف برجر (Triple)</h3>
         <p>سعر: 195 جنيه</p>
         <button onclick="addToCart('بيف برجر (Triple)', 195)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- فرايد تشكن (Single) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="single 2.jpg" alt="فرايد تشكن (Single)" />
         <h3>فرايد تشكن (Single)</h3>
         <p>سعر: 90 جنيه</p>
         <button onclick="addToCart('فرايد تشكن (Single)', 90)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- فرايد تشكن (Double) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="double 2.png" alt="فرايد تشكن (Double)" />
         <h3>فرايد تشكن (Double)</h3>
         <p>سعر: 140 جنيه</p>
         <button onclick="addToCart('فرايد تشكن (Double)', 140)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- فرايد تشكن (Triple) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="triple 2.png" alt="فرايد تشكن (Triple)" />
         <h3>فرايد تشكن (Triple)</h3>
         <p>سعر: 195 جنيه</p>
         <button onclick="addToCart('فرايد تشكن (Triple)', 195)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- تشكن برجر (Single) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="SECN.jpg" alt="تشكن برجر (Single)" />
         <h3>تشكن برجر (Single)</h3>
         <p>سعر: 80 جنيه</p>
         <button onclick="addToCart('تشكن برجر (Single)', 80)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- تشكن برجر (Double) -->
-      <div class="product">
+     <!-- <div class="product">
         <img src="SECN 2.jpg" alt="تشكن برجر (Double)" />
         <h3>تشكن برجر (Double)</h3>
         <p>سعر: 125 جنيه</p>
         <button onclick="addToCart('تشكن برجر (Double)', 125)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- تشكن برجر (Triple) -->
-      <div class="product">
+      <!--<div class="product">
         <img src="SECN 3.jpg" alt="تشكن برجر (Triple)" />
         <h3>تشكن برجر (Triple)</h3>
         <p>سعر: 180 جنيه</p>
         <button onclick="addToCart('تشكن برجر (Triple)', 180)">أضف للسلة</button>
-      </div>
+      </div>-->
 
       <!-- ميكس برجر -->
-      <div class="product">
+      <!--<div class="product">
         <img src="MEX.png" alt="ميكس برجر" />
         <h3>ميكس برجر</h3>
         <p>سعر: 140 جنيه</p>
@@ -146,9 +187,9 @@
 
   <footer class="footer">
     <p><a href="about.html" style="color: white; text-decoration: none;">© تصميم معاذ بهاء البدوي</a></p>
-  </footer>
+  </footer>-->
 
   <!-- ربط ملف JavaScript الخارجي -->
-  <script src="cart.js"></script>
+  <!--<script src="cart.js"></script>
 </body>
-</html>
+</html>-->
