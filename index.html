@@ -1,41 +1,523 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>الموقع معطّل</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Burger</title>
+  <!-- إضافة خط كايرو من جوجل فونتس -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* 1. تحسين الخطوط والألوان الأساسية */
+    body {
+      font-family: 'Cairo', sans-serif; /* استخدام خط كايرو */
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4; /* لون خلفية فاتح احتياطي */
+      /* ملاحظة: تم إزالة صورة الخلفية من الـ body لتجنب تشتيت المستخدم، يمكن وضعها في قسم معين */
+    }
 
-        .message {
-            text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 2s ease-in-out;
-        }
+    /* 2. تحسين الهيدر */
+    header {
+      display: flex;
+      justify-content: space-between; /* توزيع العناصر */
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #b71c1c; /* لون أحمر قوي للعلامة التجارية */
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      height: auto; /* إزالة الارتفاع الثابت */
+      background-image: none; /* إزالة صورة الخلفية من الهيدر */
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    header h1 {
+      font-size: 28px;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    /* 3. تحسين أيقونة السلة */
+    .cart-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-icon {
+      /* إزالة الـ position: fixed; ليكون جزء من الهيدر */
+      background-color: #000000;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cart-icon:hover {
+      background-color: #333333;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      left: -8px; /* تغيير من left إلى right بسبب RTL */
+      background-color: #ff5722; /* لون برتقالي مميز */
+      color: white;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 50%;
+      font-weight: bold;
+      z-index: 1;
+      display: flex; /* لضمان ظهوره بشكل صحيح */
+  justify-content: center;
+  align-items: center;
+    }
+
+    /* 4. تحسين لوحة السلة الجانبية */
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0; /* تغيير من left إلى right ليظهر من اليمين في RTL */
+      height: 90%;
+      width: 300px; /* زيادة العرض قليلاً */
+      max-width: 90%;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.3); /* تغيير اتجاه الظل */
+      transform: translateX(100%); /* يختفي على اليمين */
+      transition: transform 0.3s ease-in-out;
+      z-index: 1000;
+      padding: 1px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-panel.show {
+      transform: translateX(0); /* يظهر */
+    }
+
+    .cart-panel h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .close-cart {
+      cursor: pointer;
+      font-size: 24px;
+      color: #b71c1c;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    #cart-items {
+      list-style: none;
+      padding: 0;
+      flex-grow: 1; /* لجعل القائمة تأخذ المساحة المتاحة */
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 8px 0;
+      border-bottom: 1px dotted #eee;
+      font-size: 15px;
+    }
+
+    .cart-item span {
+      flex-grow: 1;
+      text-align: right;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #b71c1c;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    .total {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 2px solid #b71c1c;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
+
+    /* 5. تحسين أزرار السلة */
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cart-actions button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .cart-actions button:hover {
+      opacity: 0.9;
+    }
+
+    #clear-cart-btn {
+      background: #e0b700;
+      color: #ffffff;
+    }
+
+    #checkout-btn {
+      background: #25d366;
+      color: white;
+    }
+
+    /* 6. تحسين شبكة الأقسام */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* زيادة الحد الأدنى للعرض */
+      gap: 20px;
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+
+    .category-card {
+      background-color: #ffffff;
+      color: #b71c1c;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 12px;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid #b71c1c;
+    }
+
+    .category-card:hover {
+      background-color: #b71c1c;
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* 7. تحسين رسالة السلة الفارغة */
+    #empty-message {
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      display: none; /* إخفاء افتراضي */
+    }
+
+    #empty-message div {
+      background: #fff4f4;
+      border: 2px dashed #e53935;
+      color: #d32f2f;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      width: 90%;
+      margin: auto;
+    }
+
+    /* 8. تحسين الفوتر */
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      margin-top: 50px;
+    }
+
+    .footer a {
+      color: #ff5722;
+      text-decoration: none;
+    }
+
+    /* 9. تعديلات على الـ Media Queries */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 24px;
+      }
+      .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .cart-panel {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 10px 15px;
+      }
+      header h1 {
+        font-size: 20px;
+      }
+      .cart-panel {
+        width: 100%;
+        max-width: 100%;
+      }
+      .category-card {
+        font-size: 18px;
+        padding: 20px 10px;
+      }
+    }
+
+    /* إزالة الـ CSS غير المستخدم مثل .products, .product, .box, .static-top-nav */
+  </style>
 </head>
 <body>
-    <div class="message">
-        <h1>الموقع معطّل حالياً</h1>
-        <p>نأسف للإزعاج. الموقع تحت الصيانة. يرجى المحاولة لاحقاً.</p>
+
+  <header>
+    <h1> Super Burger</h1>
+    <div class="cart-container">
+      <div class="cart-icon" onclick="toggleCart()">🛒 أوردراتي</div>
+      <span id="cart-count" class="cart-count">0</span>
     </div>
+  </header>
+
+  <main>
+    <section class="category-grid">
+      <a href="sandwiches.html" class="category-card"> ركن البرجر و الفرايد تشكن 🍔 </a>
+      <a href="shawarma.html" class="category-card"> ركن سندوتشات السوري 🌯 </a>
+      <a href="addons.html" class="category-card"> ركن الإضافات 🧀</a>
+      <a href="sauces.html" class="category-card"> ركن الصوصات 🥫</a>
+      <a href="salads.html" class="category-card"> ركن السلطات 🥗</a>
+      <a href="drinks.html" class="category-card"> ركن المشروبات 🥤</a>
+    </section>
+  </main>
+
+
+  <!-- لوحة السلة الجانبية -->
+  <div id="cart" class="cart-panel">
+    <h2>
+      🧺 أوردراتي
+      <button class="close-cart" onclick="toggleCart()">❌</button>
+    </h2>
+
+    <ul id="cart-items">
+      <!-- سيتم إضافة عناصر السلة هنا بواسطة JavaScript -->
+    </ul>
+
+    <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
+
+    <div class="cart-actions">
+      <button id="checkout-btn" onclick="checkCartAndShowMessage()">
+        📦 استكمال الطلب على واتساب
+      </button>
+      <button id="clear-cart-btn" onclick="clearCart()">
+        🧹 حذف أوردراتي
+      </button>
+    </div>
+
+    <!-- الرسالة عند السلة الفارغة -->
+    <div id="empty-message">
+      <div>
+        ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    let cartItems = [];
+    const WHATSAPP_PHONE = "201271230053"; // رقم الواتساب
+
+    // 1. تحميل السلة عند بدء التشغيل
+    window.onload = function () {
+      const saved = localStorage.getItem("superburger_cart");
+      if (saved) {
+        try {
+          cartItems = JSON.parse(saved);
+          updateCartDisplay();
+        } catch (e) {
+          console.error("Error parsing cart from localStorage:", e);
+          cartItems = []; // مسح السلة لو حدث خطأ في التحميل
+        }
+      }
+    };
+
+    // 2. حفظ السلة في التخزين المحلي
+    function saveCart() {
+      localStorage.setItem("superburger_cart", JSON.stringify(cartItems));
+    }
+
+    // 3. فتح وإغلاق السلة
+    function toggleCart() {
+      const cart = document.getElementById("cart");
+      const cartIcon = document.querySelector(".cart-icon");
+      const cartCount = document.getElementById("cart-count");
+
+      cart.classList.toggle("show");
+
+      // إخفاء الأيقونة والعداد عند فتح السلة
+      if (cart.classList.contains("show")) {
+        cartIcon.style.visibility = "hidden";
+        cartCount.style.visibility = "hidden";
+      } else {
+        cartIcon.style.visibility = "visible";
+        cartCount.style.visibility = "visible";
+      }
+    }
+
+    // 4. إضافة منتج للسلة
+    function addToCart(name, price) {
+      // تحويل السعر إلى رقم للتأكد
+      const numericPrice = parseFloat(price);
+      if (isNaN(numericPrice) || numericPrice <= 0) {
+        console.error("Invalid price for item:", name, price);
+        return;
+      }
+
+      const existingItem = cartItems.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.push({ name, price: numericPrice, quantity: 1 });
+      }
+      updateCartDisplay();
+      saveCart();
+    }
+
+    // 5. إزالة منتج من السلة (أو تقليل الكمية)
+    function removeFromCart(index) {
+      if (index >= 0 && index < cartItems.length) {
+        if (cartItems[index].quantity > 1) {
+          cartItems[index].quantity--;
+        } else {
+          cartItems.splice(index, 1);
+        }
+        updateCartDisplay();
+        saveCart();
+      }
+    }
+
+    // 6. مسح السلة بالكامل
+    function clearCart() {
+      if (confirm("هل أنت متأكد من حذف جميع الأوردرات؟")) {
+        cartItems = [];
+        updateCartDisplay();
+        saveCart();
+      }
+    }
+
+    // 7. تحديث عرض السلة
+    function updateCartDisplay() {
+      const list = document.getElementById("cart-items");
+      const totalDiv = document.getElementById("total-price");
+      const cartCountSpan = document.getElementById("cart-count");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const clearBtn = document.getElementById("clear-cart-btn");
+
+      list.innerHTML = "";
+      let totalItems = 0;
+      let total = 0;
+
+      cartItems.forEach((item, index) => {
+        totalItems += item.quantity;
+        const itemTotal = item.quantity * item.price;
+        total += itemTotal;
+
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        li.innerHTML = `
+          <span>${item.quantity} × ${item.name} (${item.price} ج.م) = ${itemTotal.toFixed(2)} ج.م</span>
+          <button class="remove-btn" onclick="removeFromCart(${index})">🗑️</button>
+        `;
+        list.appendChild(li);
+      });
+
+      cartCountSpan.textContent = totalItems;
+      totalDiv.textContent = `الإجمالي: ${total.toFixed(2)} جنيه`;
+
+      // إظهار رسالة السلة الفارغة وإخفاء الأزرار إذا كانت السلة فارغة
+      if (cartItems.length === 0) {
+        list.innerHTML = "<p style='text-align: center; color: #777; margin-top: 20px;'>السلة فارغة. أضف منتجاتك من القائمة.</p>";
+        checkoutBtn.disabled = true;
+        clearBtn.disabled = true;
+        cartCountSpan.style.display = "none";
+      } else {
+        checkoutBtn.disabled = false;
+        clearBtn.disabled = false;
+        cartCountSpan.style.display = "flex"; // لإظهار العداد
+      }
+    }
+
+    // 8. التحقق من السلة قبل استكمال الطلب
+    function checkCartAndShowMessage() {
+      if (cartItems.length === 0) {
+        const messageBox = document.getElementById("empty-message");
+        messageBox.style.display = "block";
+        setTimeout(() => {
+          messageBox.style.display = "none";
+        }, 5000);
+      } else {
+      window.location.href = "info.html";
+    }
+    }
+
+    // 9. إرسال الطلب عبر واتساب
+    function sendOrder() {
+      let message = "📦 طلب جديد من Super Burger:\n\n";
+      let total = 0;
+      let totalItems = 0;
+
+      cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        totalItems += item.quantity;
+        message += `🍔 ${item.quantity} × ${item.name} = ${itemTotal.toFixed(2)} ج.م\n`;
+      });
+
+      message += `\n📦 عدد الأصناف: ${cartItems.length}`;
+      message += `\n🍔 عدد السندوتشات الإجمالي: ${totalItems}`;
+      message += `\n💰 الإجمالي الكلي: ${total.toFixed(2)} جنيه`;
+      message += `\n\nيرجى إرسال الموقع والعنوان لتأكيد الطلب.`;
+
+      // تشفير الرسالة لـ URL
+      const encodedMessage = encodeURIComponent(message);
+
+      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
+      window.open(url, "_blank");
+    }
+
+    // 10. دالة وهمية لإضافة منتج (للتجربة)
+    // يجب أن يتم استدعاء هذه الدالة من صفحات المنتجات (sandwiches.html, etc.)
+    // مثال: <button onclick="addToCart('ساندوتش برجر كلاسيك', 50)">أضف للسلة</button>
+    function addDummyProduct() {
+      addToCart('ساندوتش برجر كلاسيك', 50);
+      addToCart('بطاطس مقلية حجم كبير', 25);
+      addToCart('كولا', 15);
+    }
+    // يمكنك استدعاء addDummyProduct() في الكونسول للتجربة
+  </script>
+
+  <footer class="footer">
+    <p><a href="about.html" style="color: white; text-decoration: none;">© تصميم معاذ بهاء البدوي</a></p>
+  </footer>
+
 </body>
 </html>
-    
