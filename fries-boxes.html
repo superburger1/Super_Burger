@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Super Burger - ركن السلطات</title>
+  <title>Super Burger - ركن الفرايز بوكس</title>
   <!-- ربط ملف CSS الخارجي -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,10 +22,11 @@
     <a href="shawarma.html"> سندوتشات السوري 🌯</a>
     <a href="addons.html">🍟 الإضافات</a>
     <a href="sauces.html">🩸 الصوصات</a>
-    <a href="salads.html" class="active">🥗 السلطات</a>
+    <a href="salads.html">🥗 السلطات</a>
     <a href="drinks.html">🥤 المشروبات</a>
     <a href="crepe.html"> 🥘 الكريبات</a>
-    <a href="fries-boxes.html"> 🧧 الفرايز بوكس</a>
+    <a href="fries-boxes.html" class="active"> الفرايز بوكس 🧧</a>
+    
   </nav>
 
   <!-- لوحة السلة الجانبية -->
@@ -59,42 +60,36 @@
 
   <main>
     <div class="box">
-      <h1>ركن السلطات 🥗</h1>
+      <h1>ركن الفرايز بوكس 🧧</h1>
     </div>
 
     <!-- دمج جميع المنتجات في قسم واحد لتحسين الهيكلة -->
     <section class="products">
       <!-- تومية -->
       <div class="product">
-        <img src="TOM.jpg" alt="تومية" />
-        <h3>تومية</h3>
-        <p>سعر: 15 جنيه</p>
-        <button onclick="addToCart('تومية', 15)">أضف للسلة</button>
+        <img src="crepe11.png" alt="كرسبي فرايز بوكس" />
+        <h3>كرسبي فرايز بوكس</h3>
+        <p>سعر: 95 جنيه</p>
+        <button onclick="addToCart('كرسبي فرايز بوكس', 95)">أضف للسلة</button>
       </div>
 
       <!-- تومية سبايسي -->
       <div class="product">
-        <img src="SPAYS.jpeg" alt="تومية سبايسي" />
-        <h3>تومية سبايسي</h3>
-        <p>سعر: 15 جنيه</p>
-        <button onclick="addToCart('تومية سبايسي', 15)">أضف للسلة</button>
+        <img src="crepe12.png" alt="ستريبس فرايز بوكس" />
+        <h3>ستريبس فرايز بوكس</h3>
+        <p>سعر: 95 جنيه</p>
+        <button onclick="addToCart('ستريبس فرايز بوكس', 95)">أضف للسلة</button>
       </div>
 
       <!-- كول سلو -->
       <div class="product">
-        <img src="CO;O.jpg" alt="كول سلو" />
-        <h3>كول سلو</h3>
-        <p>سعر: 20 جنيه</p>
-        <button onclick="addToCart('كول سلو', 20)">أضف للسلة</button>
+        <img src="crepe13.png" alt="برجر فرايز بوكس" />
+        <h3>برجر فرايز بوكس</h3>
+        <p>سعر: 95 جنيه</p>
+        <button onclick="addToCart('برجر فرايز بوكس', 95)">أضف للسلة</button>
       </div>
 
-      <!-- هالبينو -->
-      <div class="product">
-        <img src="HALA.jpg" alt="هالبينو" />
-        <h3>هالبينو</h3>
-        <p>سعر: 10 جنيه</p>
-        <button onclick="addToCart('هالبينو', 10)">أضف للسلة</button>
-      </div>
+     
     </section>
   </main>
 

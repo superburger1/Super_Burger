@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Burger - ركن الكريبات</title>
+  <!-- ربط ملف CSS الخارجي -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Super Burger</h1>
+    <div class="cart-container">
+      <div class="cart-icon" onclick="toggleCart()">🛒 أوردراتي</div>
+      <span id="cart-count" class="cart-count">0</span>
+    </div>
+  </header>
+
+  <nav class="static-top-nav">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="sandwiches.html"> البرجر و الفرايد تشكن 🍔</a>
+    <a href="shawarma.html"> سندوتشات السوري 🌯</a>
+    <a href="addons.html">🍟 الإضافات</a>
+    <a href="sauces.html">🩸 الصوصات</a>
+    <a href="salads.html">🥗 السلطات</a>
+    <a href="drinks.html">🥤 المشروبات</a>
+    <a href="crepe.html" class="active"> 🥘 الكريبات</a>
+    <a href="fries-boxes.html"> 🧧 الفرايز بوكس</a>
+  </nav>
+
+  <!-- لوحة السلة الجانبية -->
+  <div id="cart" class="cart-panel">
+    <h2>
+      🧺 أوردراتي
+      <button class="close-cart" onclick="toggleCart()">❌</button>
+    </h2>
+    <ul id="cart-items">
+      <!-- سيتم إضافة عناصر السلة هنا بواسطة JavaScript -->
+    </ul>
+
+    <div class="total" id="total-price">الإجمالي: 0 جنيه</div>
+
+    <div class="cart-actions">
+      <button id="checkout-btn" onclick="checkCartAndShowMessage()">
+        📦 استكمال الطلب على واتساب
+      </button>
+      <button id="clear-cart-btn" onclick="clearCart()">
+        🧹 حذف أوردراتي
+      </button>
+    </div>
+
+    <!-- الرسالة عند السلة الفارغة -->
+    <div id="empty-message">
+      <div>
+        ⚠️ أوردراتي فاضية! أضف منتجاتك قبل استكمال الطلب.
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="box">
+      <h1>ركن الكريبات 🥘</h1>
+    </div>
+
+    <!-- دمج جميع المنتجات في قسم واحد لتحسين الهيكلة -->
+    <section class="products">
+      <!-- تومية -->
+      <div class="product">
+        <img src="crepe1.png" alt="كريب كرسبي" />
+        <h3>كريب كرسبي</h3>
+        <p>سعر: 120 جنيه</p>
+        <button onclick="addToCart('كريب كرسبي', 120)">أضف للسلة</button>
+      </div>
+
+      <!-- تومية سبايسي -->
+      <div class="product">
+        <img src="crepe2.png" alt="كريب ستريبس" />
+        <h3>كريب ستريبس</h3>
+        <p>سعر: 120 جنيه</p>
+        <button onclick="addToCart('كريب ستريبس', 120)">أضف للسلة</button>
+      </div>
+
+      <!-- كول سلو -->
+      <div class="product">
+        <img src="crepe3.png" alt="كريب شيش طاووق" />
+        <h3>كريب شيش طاووق</h3>
+        <p>سعر: 120 جنيه</p>
+        <button onclick="addToCart('كريب شيش طاووق', 120)">أضف للسلة</button>
+      </div>
+
+      <!-- هالبينو -->
+      <div class="product">
+        <img src="crepe4.png" alt="كريب كفتة فحم" />
+        <h3>كريب كفتة فحم</h3>
+        <p>سعر: 125 جنيه</p>
+        <button onclick="addToCart('كريب كفتة فحم', 125)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe5.png" alt="كريب شاورما فراخ" />
+        <h3>كريب شاورما فراخ</h3>
+        <p>سعر: 115 جنيه</p>
+        <button onclick="addToCart('كريب شاورما فراخ', 115)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe5.png" alt="كريب شاورما لحمة" />
+        <h3>كريب شاورما لحمة</h3>
+        <p>سعر: 125 جنيه</p>
+        <button onclick="addToCart('كريب شاورما لحمة', 125)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe6.png" alt="كريب هوت دوج" />
+        <h3>كريب هوت دوج</h3>
+        <p>سعر: 95 جنيه</p>
+        <button onclick="addToCart('كريب هوت دوج', 95)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe7.png" alt="كريب بطاطس " />
+        <h3>كريب بطاطس </h3>
+        <p>سعر: 65 جنيه</p>
+        <button onclick="addToCart('كريب بطاطس ', 65)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe8.png" alt="كريب سوبر يرجر" />
+        <h3>كريب سوبر يرجر</h3>
+        <p>سعر: 135 جنيه</p>
+        <button onclick="addToCart('كريب سوبر يرجر', 135)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe9.png" alt="كريب مكس تشكن" />
+        <h3>كريب مكس تشكن</h3>
+        <p>سعر: 130 جنيه</p>
+        <button onclick="addToCart('كريب مكس تشكن', 130)">أضف للسلة</button>
+      </div>
+
+      <div class="product">
+        <img src="crepe10.png" alt="كريب مكس بيف" />
+        <h3>كريب مكس بيف</h3>
+        <p>سعر: 130 جنيه</p>
+        <button onclick="addToCart('كريب مكس بيف', 130)">أضف للسلة</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><a href="about.html" style="color: white; text-decoration: none;">© تصميم معاذ بهاء البدوي</a></p>
+  </footer>
+
+  <!-- ربط ملف JavaScript الخارجي -->
+  <script src="cart.js"></script>
+</body>
+</html>
